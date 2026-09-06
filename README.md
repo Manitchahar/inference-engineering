@@ -9,6 +9,7 @@ no vibes, only benchmarks.
 | # | Lab | Result |
 |---|---|---|
 | 01 | [Prefix caching on vLLM (Qwen3-4B, T4)](01-prefix-cache-t4/) | 7.54× prefill speedup from KV-block reuse |
+| 02 | [Quantization: AWQ-4bit vs fp16 (Qwen3-4B, T4)](02-quantization-awq/) | 3× smaller, 2.25× KV room, 0× faster |
 
 ## Method
 
