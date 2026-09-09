@@ -43,3 +43,5 @@ capacity planning, autoscaling, and GPU sizing.
 ## Files
 
 - `throughput_sweep_qwen3-4b-awq_t4.ipynb` — full lab notebook (all probes + outputs)
+- `benchmarks_guidellm_sweep.csv` — raw GuideLLM sweep (per-level TTFT/latency percentiles)
+- `bench_serve_flood_64.csv` — flood cross-check as a readable table (raw `--save-result` JSON beside it)
