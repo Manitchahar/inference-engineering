@@ -1,9 +1,11 @@
-﻿# Chunked Prefill: Eliminating the ITL Freeze (Qwen3-4B-AWQ, vLLM, T4)
+# Chunked Prefill: Eliminating the ITL Freeze (Qwen3-4B-AWQ, vLLM, T4)
 
 Serving **Qwen3-4B-AWQ** with **vLLM (V1 engine)** on a free Colab **T4 (15 GB)**.
 Comparing monolithic prefill (`--no-enable-chunked-prefill`) against chunked prefill (vLLM V1 default) under mixed prefill and decode traffic.
 
 ## Result
+
+![Chunked Prefill Benchmark Results](lab04_results.svg)
 
 | Probe | Chunked OFF (Monolithic) | Chunked ON (Chunked) | Impact |
 |---|---|---|---|

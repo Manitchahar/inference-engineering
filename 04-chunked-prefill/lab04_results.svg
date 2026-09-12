@@ -1,0 +1,178 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675">
+  <defs>
+    <!-- Technical engineering graph grid -->
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#E5EDF7" stroke-width="0.8"/>
+    </pattern>
+    <style>
+      .font-sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+      .font-mono { font-family: "JetBrains Mono", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+      .font-serif { font-family: Georgia, Cambria, "Times New Roman", Times, serif; }
+    </style>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="1200" height="675" fill="#FFFFFF"/>
+  <rect width="1200" height="675" fill="url(#grid)"/>
+
+  <!-- Left Technical Margin Line (Tau style) -->
+  <line x1="56" y1="0" x2="56" y2="675" stroke="#E26D7C" stroke-width="2" stroke-opacity="0.5"/>
+
+  <!-- HEADER AREA -->
+  <!-- Top Eyebrow Tag -->
+  <g transform="translate(86, 36)">
+    <rect x="0" y="0" width="130" height="22" rx="4" fill="#EEF2F6" stroke="#CAD5E2" stroke-width="1"/>
+    <text x="65" y="15" text-anchor="middle" class="font-sans" font-size="10" font-weight="700" fill="#2E4057" letter-spacing="0.8">LAB RECORD 0004</text>
+    
+    <text x="142" y="15" class="font-sans" font-size="12" font-weight="600" fill="#64748B">vLLM INFERENCE BENCHMARK · Qwen3-4B-AWQ · Colab Tesla T4 (15 GB)</text>
+  </g>
+
+  <!-- Title & Subtitle -->
+  <text x="86" y="86" class="font-sans" font-size="27" font-weight="800" fill="#0F172A" letter-spacing="-0.5">Chunked Prefill: Eliminating the Prefill-Decode Freeze</text>
+  <text x="86" y="112" class="font-sans" font-size="13.5" fill="#475569">Mid-stream prompt collision &amp; multi-user serving telemetry under mixed prefill-decode load</text>
+
+  <!-- PANEL 1: PROBE 1 - STREAMING VICTIM COLLISION -->
+  <g transform="translate(86, 134)">
+    <!-- Container Box -->
+    <rect x="0" y="0" width="1058" height="152" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.2"/>
+    <rect x="0" y="0" width="1058" height="34" rx="6" fill="#F8FAFC"/>
+    <rect x="0" y="28" width="1058" height="6" fill="#F8FAFC"/>
+    <line x1="0" y1="34" x2="1058" y2="34" stroke="#CBD5E1" stroke-width="1"/>
+
+    <!-- Panel 1 Header -->
+    <text x="18" y="22" class="font-sans" font-size="11.5" font-weight="700" fill="#1E293B" letter-spacing="0.5">PROBE 1: INTERACTIVE STREAMING COLLISION (VICTIM PROBE)</text>
+    <text x="445" y="22" class="font-sans" font-size="11" fill="#64748B">Active single client streaming @ 14ms ITL · 2,000-token prompt injected mid-stream</text>
+
+    <!-- Row 1: Chunked OFF -->
+    <text x="18" y="66" class="font-sans" font-size="13" font-weight="600" fill="#334155">Chunked OFF</text>
+    <text x="18" y="82" class="font-sans" font-size="11" fill="#94A3B8">(Monolithic prefill)</text>
+    
+    <!-- Bar Chunked OFF: 2701ms -> 490px -->
+    <rect x="156" y="56" width="490" height="26" rx="4" fill="#FEE2E2" stroke="#FCA5A5" stroke-width="1"/>
+    <rect x="156" y="56" width="490" height="26" rx="4" fill="#EF4444" opacity="0.85"/>
+    <text x="658" y="74" class="font-mono" font-size="14" font-weight="700" fill="#DC2626">2,701 ms</text>
+
+    <!-- Callout badge -->
+    <rect x="745" y="55" width="295" height="28" rx="4" fill="#FEF2F2" stroke="#FECACA" stroke-width="1"/>
+    <text x="892" y="73" text-anchor="middle" class="font-sans" font-size="11.5" font-weight="700" fill="#991B1B">2.7-Second Freeze · Stream Frozen Dead</text>
+
+    <!-- Row 2: Chunked ON -->
+    <text x="18" y="118" class="font-sans" font-size="13" font-weight="600" fill="#334155">Chunked ON</text>
+    <text x="18" y="134" class="font-sans" font-size="11" fill="#94A3B8">(512 token budget)</text>
+
+    <!-- Bar Chunked ON: 86ms -> ~22px scaled representation -->
+    <rect x="156" y="108" width="22" height="26" rx="4" fill="#10B981"/>
+    <text x="190" y="126" class="font-mono" font-size="14" font-weight="700" fill="#059669">86 ms</text>
+
+    <!-- Delta badge -->
+    <rect x="745" y="107" width="295" height="28" rx="4" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1"/>
+    <text x="892" y="125" text-anchor="middle" class="font-sans" font-size="12" font-weight="800" fill="#047857">31.4x Drop in Freeze · Smooth Streaming</text>
+  </g>
+
+  <!-- PANEL 2: PROBE 2 - PRODUCTION SERVING BENCHMARK -->
+  <g transform="translate(86, 302)">
+    <!-- Container Box -->
+    <rect x="0" y="0" width="1058" height="212" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.2"/>
+    <rect x="0" y="0" width="1058" height="34" rx="6" fill="#F8FAFC"/>
+    <rect x="0" y="28" width="1058" height="6" fill="#F8FAFC"/>
+    <line x1="0" y1="34" x2="1058" y2="34" stroke="#CBD5E1" stroke-width="1"/>
+
+    <!-- Panel 2 Header -->
+    <text x="18" y="22" class="font-sans" font-size="11.5" font-weight="700" fill="#1E293B" letter-spacing="0.5">PROBE 2: CONCURRENT PRODUCTION SERVING (NATIVE vllm bench serve)</text>
+    <text x="560" y="22" class="font-sans" font-size="11" fill="#64748B">32 requests · 1,024 prompt / 64 decode tokens · Poisson arrival @ 2.0 req/s</text>
+
+    <!-- 4-Column Grid for Metrics -->
+    <!-- Column 1: P99 Inter-Token Latency -->
+    <g transform="translate(18, 48)">
+      <rect x="0" y="0" width="240" height="148" rx="5" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+      <text x="14" y="22" class="font-sans" font-size="11" font-weight="700" fill="#475569" letter-spacing="0.3">P99 INTER-TOKEN LATENCY</text>
+      
+      <text x="14" y="48" class="font-sans" font-size="11" fill="#64748B">Chunked OFF:</text>
+      <text x="96" y="48" class="font-mono" font-size="12" font-weight="600" fill="#DC2626">6,123 ms</text>
+
+      <text x="14" y="70" class="font-sans" font-size="11" fill="#64748B">Chunked ON:</text>
+      <text x="96" y="70" class="font-mono" font-size="13" font-weight="800" fill="#059669">1,511 ms</text>
+
+      <!-- Delta Highlight -->
+      <rect x="14" y="86" width="212" height="30" rx="4" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1"/>
+      <text x="120" y="106" text-anchor="middle" class="font-sans" font-size="12" font-weight="800" fill="#047857">-75.3% (4.05x Drop)</text>
+
+      <text x="14" y="134" class="font-sans" font-size="9.5" fill="#64748B">Drastically cuts tail stutter</text>
+    </g>
+
+    <!-- Column 2: P99 TTFT -->
+    <g transform="translate(276, 48)">
+      <rect x="0" y="0" width="240" height="148" rx="5" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+      <text x="14" y="22" class="font-sans" font-size="11" font-weight="700" fill="#475569" letter-spacing="0.3">P99 TIME TO FIRST TOKEN</text>
+      
+      <text x="14" y="48" class="font-sans" font-size="11" fill="#64748B">Chunked OFF:</text>
+      <text x="96" y="48" class="font-mono" font-size="12" font-weight="600" fill="#DC2626">15.91 s</text>
+
+      <text x="14" y="70" class="font-sans" font-size="11" fill="#64748B">Chunked ON:</text>
+      <text x="96" y="70" class="font-mono" font-size="13" font-weight="800" fill="#059669">11.42 s</text>
+
+      <!-- Delta Highlight -->
+      <rect x="14" y="86" width="212" height="30" rx="4" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1"/>
+      <text x="120" y="106" text-anchor="middle" class="font-sans" font-size="12" font-weight="800" fill="#047857">4.5s Faster (-28.2%)</text>
+
+      <text x="14" y="134" class="font-sans" font-size="9.5" fill="#64748B">Unblocks head-of-line queue</text>
+    </g>
+
+    <!-- Column 3: Output Throughput -->
+    <g transform="translate(534, 48)">
+      <rect x="0" y="0" width="240" height="148" rx="5" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+      <text x="14" y="22" class="font-sans" font-size="11" font-weight="700" fill="#475569" letter-spacing="0.3">OUTPUT THROUGHPUT</text>
+      
+      <text x="14" y="48" class="font-sans" font-size="11" fill="#64748B">Chunked OFF:</text>
+      <text x="96" y="48" class="font-mono" font-size="12" font-weight="600" fill="#475569">55.03 tok/s</text>
+
+      <text x="14" y="70" class="font-sans" font-size="11" fill="#64748B">Chunked ON:</text>
+      <text x="96" y="70" class="font-mono" font-size="13" font-weight="800" fill="#059669">59.35 tok/s</text>
+
+      <!-- Delta Highlight -->
+      <rect x="14" y="86" width="212" height="30" rx="4" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1"/>
+      <text x="120" y="106" text-anchor="middle" class="font-sans" font-size="12" font-weight="800" fill="#047857">+7.8% Higher Throughput</text>
+
+      <text x="14" y="134" class="font-sans" font-size="9.5" fill="#64748B">Saturates GPU idle bubbles</text>
+    </g>
+
+    <!-- Column 4: Median ITL -->
+    <g transform="translate(792, 48)">
+      <rect x="0" y="0" width="248" height="148" rx="5" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+      <text x="14" y="22" class="font-sans" font-size="11" font-weight="700" fill="#475569" letter-spacing="0.3">MEDIAN INTER-TOKEN LATENCY</text>
+      
+      <text x="14" y="48" class="font-sans" font-size="11" fill="#64748B">Chunked OFF:</text>
+      <text x="96" y="48" class="font-mono" font-size="12" font-weight="600" fill="#475569">132.88 ms</text>
+
+      <text x="14" y="70" class="font-sans" font-size="11" fill="#64748B">Chunked ON:</text>
+      <text x="96" y="70" class="font-mono" font-size="13" font-weight="800" fill="#1E293B">133.33 ms</text>
+
+      <!-- Delta Highlight -->
+      <rect x="14" y="86" width="220" height="30" rx="4" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1"/>
+      <text x="124" y="106" text-anchor="middle" class="font-sans" font-size="12" font-weight="700" fill="#475569">Flat (&lt;0.3% delta)</text>
+
+      <text x="14" y="134" class="font-sans" font-size="9.5" fill="#64748B">Steady-state decode unchanged</text>
+    </g>
+  </g>
+
+  <!-- PANEL 3: MECHANICAL INTUITION NOTES (Bottom Callouts) -->
+  <g transform="translate(86, 528)">
+    <!-- Note Box Left -->
+    <rect x="0" y="0" width="518" height="92" rx="5" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+    <text x="16" y="22" class="font-sans" font-size="11.5" font-weight="700" fill="#0F172A">The Physical Mechanism: GEMV vs. GEMM</text>
+    <text x="16" y="44" class="font-sans" font-size="11" fill="#334155">Decode is memory-bound (tiny GEMV, ~14ms). Monolithic prefill is compute-bound</text>
+    <text x="16" y="60" class="font-sans" font-size="11" fill="#334155">(massive GEMM) and monopolizes GPU Tensor Cores. Chunking slices prefills to</text>
+    <text x="16" y="76" class="font-sans" font-size="11" font-weight="600" fill="#059669">co-schedule decode tokens in every iteration, eliminating user-facing stalls.</text>
+
+    <!-- Note Box Right -->
+    <rect x="540" y="0" width="518" height="92" rx="5" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+    <text x="556" y="22" class="font-sans" font-size="11.5" font-weight="700" fill="#0F172A">The Queue Paradox: Why P99 TTFT Improved</text>
+    <text x="556" y="44" class="font-sans" font-size="11" fill="#334155">Theory warns of chunking overhead on single requests. Under multi-user load,</text>
+    <text x="556" y="60" class="font-sans" font-size="11" fill="#334155">P99 TTFT actually fell by 4.5s (-28%) because smaller prefill chunks eliminate</text>
+    <text x="556" y="76" class="font-sans" font-size="11" font-weight="600" fill="#059669">head-of-line blocking in the scheduler, draining arrival queues faster.</text>
+  </g>
+
+  <!-- FOOTER -->
+  <text x="86" y="650" class="font-mono" font-size="11" fill="#64748B">github.com/Manitchahar/inference-engineering/tree/main/04-chunked-prefill</text>
+  <text x="1144" y="650" text-anchor="end" class="font-sans" font-size="11" font-weight="600" fill="#94A3B8">Lab 04 · Native Benchmarking CLI · Verified Reproducible</text>
+</svg>
