@@ -60,13 +60,13 @@
     <text x="18" y="118" class="font-sans" font-size="13" font-weight="600" fill="#334155">Chunked ON</text>
     <text x="18" y="134" class="font-sans" font-size="11" fill="#94A3B8">(512 token budget)</text>
 
-    <!-- Bar Chunked ON: 86ms -> ~22px scaled representation -->
+    <!-- Bar Chunked ON: 85ms -> ~22px scaled representation -->
     <rect x="156" y="108" width="22" height="26" rx="4" fill="#10B981"/>
-    <text x="190" y="126" class="font-mono" font-size="14" font-weight="700" fill="#059669">86 ms</text>
+    <text x="190" y="126" class="font-mono" font-size="14" font-weight="700" fill="#059669">85 ms</text>
 
     <!-- Delta badge -->
     <rect x="745" y="107" width="295" height="28" rx="4" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1"/>
-    <text x="892" y="125" text-anchor="middle" class="font-sans" font-size="12" font-weight="800" fill="#047857">31.4x Drop in Freeze · Smooth Streaming</text>
+    <text x="892" y="125" text-anchor="middle" class="font-sans" font-size="12" font-weight="800" fill="#047857">32x Drop in Freeze · Smooth Streaming</text>
   </g>
 
   <!-- PANEL 2: PROBE 2 - PRODUCTION SERVING BENCHMARK -->
@@ -139,7 +139,7 @@
     <!-- Column 4: Median ITL -->
     <g transform="translate(792, 48)">
       <rect x="0" y="0" width="248" height="148" rx="5" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
-      <text x="14" y="22" class="font-sans" font-size="11" font-weight="700" fill="#475569" letter-spacing="0.3">MEDIAN INTER-TOKEN LATENCY</text>
+      <text x="14" y="22" class="font-sans" font-size="11" font-weight="700" fill="#475569" letter-spacing="0.3">MEDIAN DECODE LATENCY</text>
       
       <text x="14" y="48" class="font-sans" font-size="11" fill="#64748B">Chunked OFF:</text>
       <text x="96" y="48" class="font-mono" font-size="12" font-weight="600" fill="#475569">132.88 ms</text>
@@ -155,21 +155,21 @@
     </g>
   </g>
 
-  <!-- PANEL 3: MECHANICAL INTUITION NOTES (Bottom Callouts) -->
+  <!-- PANEL 3: PRACTITIONER NOTES (Bottom Callouts) -->
   <g transform="translate(86, 528)">
     <!-- Note Box Left -->
     <rect x="0" y="0" width="518" height="92" rx="5" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
-    <text x="16" y="22" class="font-sans" font-size="11.5" font-weight="700" fill="#0F172A">The Physical Mechanism: GEMV vs. GEMM</text>
-    <text x="16" y="44" class="font-sans" font-size="11" fill="#334155">Decode is memory-bound (tiny GEMV, ~14ms). Monolithic prefill is compute-bound</text>
-    <text x="16" y="60" class="font-sans" font-size="11" fill="#334155">(massive GEMM) and monopolizes GPU Tensor Cores. Chunking slices prefills to</text>
-    <text x="16" y="76" class="font-sans" font-size="11" font-weight="600" fill="#059669">co-schedule decode tokens in every iteration, eliminating user-facing stalls.</text>
+    <text x="16" y="22" class="font-sans" font-size="11.5" font-weight="700" fill="#0F172A">The 8,192 Default Trap: Why Tuning Matters</text>
+    <text x="16" y="44" class="font-sans" font-size="11" fill="#334155">vLLM V1 enables chunked prefill by default, but with an 8,192-token budget.</text>
+    <text x="16" y="60" class="font-sans" font-size="11" fill="#334155">A 2,000-token prompt fits in ONE chunk unless you explicitly lower</text>
+    <text x="16" y="76" class="font-sans" font-size="11" font-weight="600" fill="#059669">--max-num-batched-tokens below prompt size (e.g. 512).</text>
 
     <!-- Note Box Right -->
     <rect x="540" y="0" width="518" height="92" rx="5" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
-    <text x="556" y="22" class="font-sans" font-size="11.5" font-weight="700" fill="#0F172A">The Queue Paradox: Why P99 TTFT Improved</text>
-    <text x="556" y="44" class="font-sans" font-size="11" fill="#334155">Theory warns of chunking overhead on single requests. Under multi-user load,</text>
-    <text x="556" y="60" class="font-sans" font-size="11" fill="#334155">P99 TTFT actually fell by 4.5s (-28%) because smaller prefill chunks eliminate</text>
-    <text x="556" y="76" class="font-sans" font-size="11" font-weight="600" fill="#059669">head-of-line blocking in the scheduler, draining arrival queues faster.</text>
+    <text x="556" y="22" class="font-sans" font-size="11.5" font-weight="700" fill="#0F172A">Timing Race &amp; Head-of-Line Queue Drain</text>
+    <text x="556" y="44" class="font-sans" font-size="11" fill="#334155">Landing a prompt mid-decode is a race: Chunking OFF hit 86ms (miss) and 2,701ms (hit).</text>
+    <text x="556" y="60" class="font-sans" font-size="11" fill="#334155">Chunking ON eliminates luck (86ms every time). Under load, smaller chunks</text>
+    <text x="556" y="76" class="font-sans" font-size="11" font-weight="600" fill="#059669">drain queue backlog faster, dropping P99 TTFT by 4.5 seconds.</text>
   </g>
 
   <!-- FOOTER -->
