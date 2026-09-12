@@ -11,6 +11,7 @@ no vibes, only benchmarks.
 | 01 | [Prefix caching on vLLM (Qwen3-4B, T4)](01-prefix-cache-t4/) | 7.54× prefill speedup from KV-block reuse |
 | 02 | [Quantization: AWQ-4bit vs fp16 (Qwen3-4B, T4)](02-quantization-awq/) | 3× smaller, 2.25× KV room, 0× faster |
 | 03 | [Throughput sweep: ceiling, knee, cliff (Qwen3-4B-AWQ, T4)](03-throughput-sweep/) | ~3 req/s sellable @ 128 ms TTFT; 510 tok/s only @ 3.6 s p99 |
+| 04 | [Chunked prefill: killing the ITL freeze (Qwen3-4B-AWQ, T4)](04-chunked-prefill/) | 31× reduction in freeze (2.7s to 86ms), 4× drop in P99 ITL |
 
 ## Method
 
