@@ -33,7 +33,7 @@ Why: Monolithic prefills cause severe head-of-line blocking in the HTTP queue. B
 
 1. Open `chunked_prefill_qwen3_t4.ipynb` on Colab (T4 GPU runtime)
 2. Run baseline server: `vllm serve Qwen/Qwen3-4B-AWQ --dtype float16 --no-enable-chunked-prefill`
-3. Run optimized server: `vllm serve Qwen/Qwen3-4B-AWQ --dtype float16` (Chunked prefill is default in vLLM V1)
+3. Run optimized server: `vllm serve Qwen/Qwen3-4B-AWQ --dtype float16 --max-num-batched-tokens 512` (chunked prefill is default in vLLM V1; the 512-token budget is what forces the 2k cannon to actually chunk)
 4. Compare victim stream ITL and `vllm bench serve` outputs to the table above
 
 ## Files
